@@ -1,0 +1,23 @@
+.vs/
+.dotnet/
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# ASP.NET / local settings
+appsettings.Development.json
+
+# Node/web dependencies and build artifacts
+node_modules/
+dist/
+build/

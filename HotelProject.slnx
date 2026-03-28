@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/API/">
+    <Project Path="API/API.BusinessLayer/API.BusinessLayer.csproj" />
+    <Project Path="API/API.Consume/API.Consume.csproj" />
+    <Project Path="API/API.DataAccessLayer/API.DataAccessLayer.csproj" />
+    <Project Path="API/API.DtoLayer/API.DtoLayer.csproj" />
+    <Project Path="API/API.EntityLayer/API.EntityLayer.csproj" />
+  </Folder>
+  <Folder Name="/WEB/">
+    <Project Path="WEB/WEB.UI/WEB_UI.csproj" />
+  </Folder>
+</Solution>

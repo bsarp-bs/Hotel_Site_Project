@@ -1,0 +1,35 @@
+﻿@model WEB_UI.Models.StaffViewModel
+@{
+    ViewData["Title"] = "AddTeam";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Personel Kaydı</h4>
+
+            <form class="forms-sample" method="post" asp-action="AddTeam" asp-controller="Team">
+
+                    <div class="form-group">
+                        <label asp-for="Name">İsim </label>
+                        <input asp-for="Name" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Title">Ünvan</label>
+                        <input asp-for="Title" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Url">Link</label>
+                        <input asp-for="Url" class="form-control"/>
+                    </div>
+
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>

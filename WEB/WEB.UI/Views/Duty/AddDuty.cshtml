@@ -1,0 +1,39 @@
+﻿@model WEB_UI.UI_DTO.DutyDTOs.InsertDutyDto
+@{
+    ViewData["Title"] = "AddDuty";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Referans Kaydı</h4>
+
+            <form class="forms-sample" method="post" asp-action="AddDuty" asp-controller="Duty">
+
+                <div class="form-group">
+                    <label asp-for="Title">Hizmet Adı </label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Desc">Hizmet Açıklaması</label>
+                    <input asp-for="Desc" class="form-control" />
+                    <span asp-validation-for="Desc" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Icon">Hizmet Icon</label>
+                    <input asp-for="Icon" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,43 @@
+﻿@model WEB_UI.Models.ReffViewModel
+@{
+    ViewData["Title"] = "EditReff";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Referans Kaydı</h4>
+
+            <form class="forms-sample" method="post" asp-action="EditReff" asp-controller="Reff">
+
+                <input type="hidden" asp-for="ReffID" />
+
+                <div class="form-group">
+                    <label asp-for="Name">Referans Adı </label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Title">Referans Ünvanı</label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Desc">Referans Açıklaması</label>
+                    <input asp-for="Desc" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Image">Referans Görsel</label>
+                    <input asp-for="Image" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>

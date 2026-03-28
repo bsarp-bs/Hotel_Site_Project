@@ -1,0 +1,27 @@
+@model WEB_UI.Models.SubscribeViewModel
+@{
+    ViewData["Title"] = "EditSubscribe";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Abone Kaydı</h4>
+
+            <form class="forms-sample" method="post" asp-action="EditSubscribe" asp-controller="Subscribe">
+
+                <input type="hidden" asp-for="SubscribeID" />
+
+                <div class="form-group">
+                    <label asp-for="Mail">Mail Adresi</label>
+                    <input asp-for="Mail" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
