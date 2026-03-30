@@ -9,7 +9,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hotelier</title>
+    <title>HotelimBurada</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,13 +51,15 @@
        
         @await Component.InvokeAsync("_RoomP")
 
-        @await Component.InvokeAsync("_VideoP")
+        @*  @await Component.InvokeAsync("_VideoP") *@
        
         @await Component.InvokeAsync("_ServiceP")
 
         @await Component.InvokeAsync("_TestimonialP")
 
         @await Component.InvokeAsync("_TeamP")  
+
+        @await Html.PartialAsync("/Views/CustomerScreen/AddNewsletter.cshtml")
        
         @await Component.InvokeAsync("_FooterP")
         
