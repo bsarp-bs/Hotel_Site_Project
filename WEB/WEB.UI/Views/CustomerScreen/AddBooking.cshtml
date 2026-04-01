@@ -1,0 +1,113 @@
+﻿@model WEB_UI.UI_DTO.BookingDTOs.InsertBookingDto
+
+<!-- Booking Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title text-center text-primary text-uppercase">Room Booking</h6>
+                <h1 class="mb-5">Book A <span class="text-primary text-uppercase">Luxury Room</span></h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="row g-3">
+                        <div class="col-6 text-end">
+                            <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="~/hotel-html-template/img/about-1.jpg" style="margin-top: 25%;">
+                        </div>
+                        <div class="col-6 text-start">
+                            <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="~/hotel-html-template/img/about-2.jpg">
+                        </div>
+                        <div class="col-6 text-end">
+                            <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="~/hotel-html-template/img/about-3.jpg">
+                        </div>
+                        <div class="col-6 text-start">
+                            <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="~/hotel-html-template/img/about-4.jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <form method="post" asp-action="AddBooking" asp-controller="CustomerScreen">
+                            <div class="row g-3">
+                                @if (TempData["BookingSuccess"] is not null)
+                                {
+                                    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+                                }
+
+                                @if (TempData["BookingError"] is not null)
+                                {
+                                    <div class="alert alert-danger">@TempData["BookingError"]</div>
+                                }
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input asp-for="Name" type="text" class="form-control" placeholder="İsminiz">
+                                        <label asp-for="Name">İsminiz</label>
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+                                        <label asp-for="Email">Your Email</label>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating date" data-target-input="nearest">
+                                        <input type="datetime" class="form-control datetimepicker-input" asp-for="CheckIn" placeholder="Check In"
+                                        data-target="#date3" data-toggle="datetimepicker" />
+                                        <label asp-for="CheckIn">Check In</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating date" data-target-input="nearest">
+                                        <input type="datetime" class="form-control datetimepicker-input" placeholder="Check Out" asp-for="CheckOut"
+                                        data-target="#date3" data-toggle="datetimepicker" />
+                                        <label asp-for="CheckOut">Check In</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                            <input asp-for="AdultCount" type="number" class="form-control" placeholder="Adult Sayısı">
+                                            <label asp-for="AdultCount">Adult Sayısı</label>
+                                            <span asp-validation-for="AdultCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                            <input asp-for="ChildCount" type="number" class="form-control" placeholder="Çocuk Sayısı">
+                                            <label asp-for="ChildCount">Çocuk Sayısı</label>
+                                            <span asp-validation-for="ChildCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                            <input asp-for="RoomCount" type="number" class="form-control" placeholder="Oda Sayısı">
+                                            <label asp-for="RoomCount">Oda Sayısı</label>
+                                            <span asp-validation-for="RoomCount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                            <textarea asp-for="SpecialReq" class="form-control" placeholder="Özel İstek" 
+                                            style="height: 100px"></textarea>
+                                            <label asp-for="SpecialReq">Özel İstek</label>
+                                            <span asp-validation-for="SpecialReq" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Oda Tut</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Booking End -->

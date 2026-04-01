@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WEB_UI.UI_DTO.BookingDTOs;
 using WEB_UI.UI_DTO.DutyDTOs;
 using WEB_UI.UI_DTO.SubscribeDTOs;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using WEB_UI.Models;
 
 namespace WEB_UI.Controllers
 {
@@ -44,6 +48,37 @@ namespace WEB_UI.Controllers
             ModelState.AddModelError(string.Empty, "Görev eklenirken bir hata oluştu.");
             return View(_subsdto);
 
+        }
+
+        [HttpGet]
+        public PartialViewResult AddBooking()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBooking(InsertBookingDto bookingdto)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["BookingError"] = "Lutfen form alanlarini kontrol edin.";
+                return RedirectToAction("CustomerScreenIndex");
+            }
+
+            var client = _httpClientFactory.CreateClient();
+            bookingdto.Status = "Onay Bekliyor";
+
+            var response = await client.PostAsJsonAsync("https://localhost:7227/api/Booking", bookingdto);
+            
+            if (response.IsSuccessStatusCode) 
+            {
+                TempData["BookingSuccess"] = "Oda talebiniz alindi.";
+                return RedirectToAction("CustomerScreenIndex");
+            }
+
+            var responseText = await response.Content.ReadAsStringAsync();
+            TempData["BookingError"] = $"Oda tutarken hata olustu. Kod: {(int)response.StatusCode}. Detay: {responseText}";
+            return RedirectToAction("CustomerScreenIndex");
         }
     }
 }

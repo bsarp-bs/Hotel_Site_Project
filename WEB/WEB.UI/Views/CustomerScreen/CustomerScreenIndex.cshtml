@@ -45,7 +45,11 @@
 
         @await Component.InvokeAsync("_CarouselP")
 
-        @await Component.InvokeAsync("_BookingP")
+        @*  @await Component.InvokeAsync("_BookingP") *@
+
+        @await Component.InvokeAsync("_WeatherP")
+
+        @await Html.PartialAsync("/Views/CustomerScreen/AddBooking.cshtml")
 
         @await Component.InvokeAsync("_AboutP")
        

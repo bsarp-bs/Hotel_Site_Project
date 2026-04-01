@@ -1,5 +1,6 @@
 ﻿using API.EntityLayer.Concrete;
 using AutoMapper;
+using WEB_UI.UI_DTO.BookingDTOs;
 using WEB_UI.UI_DTO.DutyDTOs;
 using WEB_UI.UI_DTO.LoginDTOs;
 using WEB_UI.UI_DTO.ReffDTOs;
@@ -29,6 +30,10 @@ namespace WEB_UI.UI_DTO.Mapping
             CreateMap<TeamDto, Team>().ReverseMap();
 
             CreateMap<InsertSubscribeDto, Subscribe>().ReverseMap();
+
+            CreateMap<InsertBookingDto,Booking>().ReverseMap();
+            CreateMap<ViewBookingDto, Booking>().ReverseMap();
+            
         }
     }
 }

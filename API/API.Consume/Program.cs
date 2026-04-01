@@ -34,6 +34,9 @@ builder.Services.AddScoped<IReffDAL, EFReffDAL>();
 builder.Services.AddScoped<ISubscribeService, SubscribeManagerBL>();
 builder.Services.AddScoped<ISubscribeDAL, EFSubscribeDAL>();
 
+builder.Services.AddScoped<IBookingService, BookingManagerBL>();
+builder.Services.AddScoped<IBookingDAL, EFBookingDAL>();
+
 // CORS
 builder.Services.AddCors(opt =>
 {

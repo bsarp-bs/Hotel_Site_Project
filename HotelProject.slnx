@@ -6,6 +6,9 @@
     <Project Path="API/API.DtoLayer/API.DtoLayer.csproj" />
     <Project Path="API/API.EntityLayer/API.EntityLayer.csproj" />
   </Folder>
+  <Folder Name="/JasonWToken/">
+    <Project Path="JWT/JWT.csproj" Id="7a022e7e-21ab-488d-89e1-b810a08f4c32" />
+  </Folder>
   <Folder Name="/WEB/">
     <Project Path="WEB/WEB.UI/WEB_UI.csproj" />
   </Folder>

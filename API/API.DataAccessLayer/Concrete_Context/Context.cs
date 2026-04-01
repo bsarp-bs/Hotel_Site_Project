@@ -31,5 +31,6 @@ namespace API.DataAccessLayer.Concrete_Context
         public DbSet<Duty> Dutys { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using WEB_UI.UI_DTO.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.GetSection("RapidApi");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
