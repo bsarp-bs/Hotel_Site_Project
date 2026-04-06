@@ -1,0 +1,41 @@
+﻿@model List<WEB_UI.Models.SendedMessagesViewModel>
+@{
+    ViewData["Title"] = "SendedMessagesIndex";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="email-left-box">
+                   <a asp-controller="Contact" asp-action="AddSendedMessages" class="btn btn-primary btn-block">Mesaj Gönder</a>
+                <div class="mail-list mt-4">
+                    <a asp-controller="Contact" asp-action="ContactIndex" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>Gelen Kutusu</b></a>
+                    <a asp-controller="Contact" asp-action="SendedMessagesIndex" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i><b>Gönderilen</b>
+                        <span class="badge badge-primary badge-sm float-right m-t-5">@Model.Count</span></a>
+                </div>
+            </div>
+            <div class="email-right-box">
+                <div class="email-list m-t-15">
+                    @foreach (var item in Model)
+                    {
+                        <div class="message">
+                            <a asp-controller="Contact" asp-action="EditSendedMessages" asp-route-id="@item.ID">
+                                <div class="col-mail col-mail-1">
+                                    <div class="email-checkbox">
+                                        <input type="checkbox" id="chk2">
+                                        <label class="toggle" for="chk2"></label>
+                                    </div><span class="star-toggle ti-star"></span>
+                                </div>
+                                <div class="col-mail col-mail-2">
+                                    <div class="subject">@item.Message</div>
+                                    <div class="date">@item.Title</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

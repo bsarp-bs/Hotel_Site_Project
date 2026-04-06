@@ -5,9 +5,12 @@ using WEB_UI.UI_DTO.SubscribeDTOs;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using WEB_UI.Models;
+using WEB_UI.UI_DTO.ContactDTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WEB_UI.Controllers
 {
+    [AllowAnonymous]
     public class CustomerScreenController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -79,6 +82,33 @@ namespace WEB_UI.Controllers
             var responseText = await response.Content.ReadAsStringAsync();
             TempData["BookingError"] = $"Oda tutarken hata olustu. Kod: {(int)response.StatusCode}. Detay: {responseText}";
             return RedirectToAction("CustomerScreenIndex");
+        }
+
+        [HttpGet]
+        public PartialViewResult AddContact() 
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddContact(InsertContactDto _contact) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("CustomerScreenIndex");
+            }
+
+            var client = _httpClientFactory.CreateClient();
+
+            var response = await client.PostAsJsonAsync("https://localhost:7227/api/Contact", _contact);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("CustomerScreenIndex");
+            }
+
+            ModelState.AddModelError(string.Empty, "Mail yollarken hata oluştu.");
+            return View(_contact);
         }
     }
 }

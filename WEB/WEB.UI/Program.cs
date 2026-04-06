@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using WEB_UI.UI_DTO.Mapping;
 
@@ -11,6 +14,23 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddAutoMapper(typeof(UI_MapperConfig));
 
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
+
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.HttpOnly = true;
+    opt.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+    opt.LoginPath = "/CustomerScreen/CustomerScreenIndex";
+});
+
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +42,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
 

@@ -8,6 +8,7 @@ using WEB_UI.UI_DTO.RegisterDTOs;
 using WEB_UI.UI_DTO.RoomDTOs;
 using WEB_UI.UI_DTO.SubscribeDTOs;
 using WEB_UI.UI_DTO.TeamDTOs;
+using WEB_UI.UI_DTO.ContactDTOs;
 
 namespace WEB_UI.UI_DTO.Mapping
 {
@@ -26,6 +27,7 @@ namespace WEB_UI.UI_DTO.Mapping
             CreateMap<ReffDto, Reff>().ReverseMap();
 
             CreateMap<ViewRoomDto, Room>().ReverseMap();
+            CreateMap<InsertRoomDto, Room>().ReverseMap();
 
             CreateMap<TeamDto, Team>().ReverseMap();
 
@@ -33,7 +35,11 @@ namespace WEB_UI.UI_DTO.Mapping
 
             CreateMap<InsertBookingDto,Booking>().ReverseMap();
             CreateMap<ViewBookingDto, Booking>().ReverseMap();
-            
+
+            CreateMap<InsertContactDto, Contact>().ReverseMap();
+            CreateMap<ViewContactDto, Contact>().ReverseMap();
+            CreateMap<UpdateContactDto, Contact>().ReverseMap();
+
         }
     }
 }

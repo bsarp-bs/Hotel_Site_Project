@@ -9,6 +9,8 @@ namespace API.Consume.Map
         public MapperConfig()
         {
             /*  
+                THIS CLASS IS NOT USING ONT PROJECT
+
                 CreateMap<RoomDTO, Room>();
                 CreateMap<Room,RoomDTO>();
             */

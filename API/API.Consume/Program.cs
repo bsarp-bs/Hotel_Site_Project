@@ -1,10 +1,12 @@
 using API.BusinessLayer.Concrete_Manager;
 using API.BusinessLayer.Service;
 using API.Consume.Map;
+using API.Consume.Validators;
 using API.DataAccessLayer.Abstract;
 using API.DataAccessLayer.Concrete_Context;
 using API.DataAccessLayer.EntityFramework;
 using API.EntityLayer.Concrete;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,15 @@ builder.Services.AddScoped<ISubscribeDAL, EFSubscribeDAL>();
 builder.Services.AddScoped<IBookingService, BookingManagerBL>();
 builder.Services.AddScoped<IBookingDAL, EFBookingDAL>();
 
+builder.Services.AddScoped<IGuestService, GuestManagerBL>();
+builder.Services.AddScoped<IGuestDAL, EFGuestDAL>();
+
+builder.Services.AddScoped<IContactService, ContactManagerBL>();
+builder.Services.AddScoped<IContactDAL, EFContactDAL>();
+
+builder.Services.AddScoped<ISendedMessagesService, SendedMessagesBL>();
+builder.Services.AddScoped<ISendedMessagesDAL, EFSendedMessagesDAL>();
+
 // CORS
 builder.Services.AddCors(opt =>
 {
@@ -50,6 +61,7 @@ builder.Services.AddCors(opt =>
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddValidatorsFromAssemblyContaining<RoomValidator>();
 
 // Controllers + Swagger
 builder.Services.AddControllers();

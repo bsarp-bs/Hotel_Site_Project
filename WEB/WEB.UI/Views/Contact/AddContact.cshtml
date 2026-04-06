@@ -1,0 +1,38 @@
+@model WEB_UI.UI_DTO.ContactDTOs.InsertContactDto
+@{
+    ViewData["Title"] = "AddContact";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Iletisim Kaydi</h4>
+
+            <form class="forms-sample" method="post" asp-action="AddContact" asp-controller="Contact">
+                <div class="form-group">
+                    <label asp-for="Name">Ad Soyad</label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mail">Mail</label>
+                    <input asp-for="Mail" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Subject">Konu</label>
+                    <input asp-for="Subject" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Message">Mesaj</label>
+                    <textarea asp-for="Message" class="form-control" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+            </form>
+
+        </div>
+    </div>
+</div>

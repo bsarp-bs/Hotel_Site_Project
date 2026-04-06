@@ -61,7 +61,9 @@
 
         @await Component.InvokeAsync("_TestimonialP")
 
-        @await Component.InvokeAsync("_TeamP")  
+        @await Component.InvokeAsync("_TeamP")
+
+        @await Html.PartialAsync("/Views/CustomerScreen/AddContact.cshtml")
 
         @await Html.PartialAsync("/Views/CustomerScreen/AddNewsletter.cshtml")
        

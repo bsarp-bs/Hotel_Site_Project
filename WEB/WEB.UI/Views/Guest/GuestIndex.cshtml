@@ -1,0 +1,61 @@
+@model List<WEB_UI.UI_DTO.GuestDTOs.ViewGuestDto>
+@{
+    ViewData["Title"] = "GuestIndex";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="card-title">
+                        <h4>Misafir Listesi</h4>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Misafir Adi</th>
+                                    <th>Kisi Sayisi</th>
+                                    <th>Sil</th>
+                                    <th>Guncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.GuestID</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Count</td>
+                                        <td>
+                                            <a asp-controller="Guest"
+                                               asp-action="DeleteGuest"
+                                               asp-route-id="@item.GuestID"
+                                               class="btn btn-success form-group">Sil</a>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Guest"
+                                               asp-action="EditGuest"
+                                               asp-route-id="@item.GuestID"
+                                               class="btn btn-success form-group">Guncelle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a asp-controller="Guest"
+                       asp-action="AddGuest"
+                       class="btn btn-success form-group">Yeni Ekle</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

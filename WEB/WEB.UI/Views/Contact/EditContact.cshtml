@@ -1,0 +1,43 @@
+@model WEB_UI.UI_DTO.ContactDTOs.UpdateContactDto
+@{
+    ViewData["Title"] = "EditContact";
+    Layout = "~/Views/Admin/AdminIndex.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="email-left-box">
+                <a asp-controller="Contact" asp-action="AddSendedMessages" class="btn btn-primary btn-block">Mesaj Gönder</a>
+                <div class="mail-list mt-4">
+                    <a asp-controller="Contact" asp-action="ContactIndex" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>Gelen Kutusu</b></a>
+                    <a asp-controller="Contact" asp-action="SendedMessagesIndex" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>Gönderilen</a>
+                </div>
+            </div>
+            <div class="email-right-box">
+                <div class="email-list m-t-15">
+                    <div class="read-content">
+                        <div class="media pt-5">
+                            <img class="mr-3 rounded-circle" src="~/adminweb/images/avatar/1.jpg">
+                            <div class="media-body">
+                                <h5 class="m-b-3">@Model.Name</h5>
+                            </div>                   
+                        </div>
+                        <hr>
+                        <div class="media mb-4 mt-1">
+                            <div class="media-body">
+                                <h4 class="m-0 text-primary">@Model.Subject</h4><small class="text-muted">From: @Model.Mail</small>
+                            </div>
+                        </div>
+                        <h5 class="m-b-15">@Model.Name</h5>
+                        <p>
+                            @Model.Message
+                        </p>
+                        <hr>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

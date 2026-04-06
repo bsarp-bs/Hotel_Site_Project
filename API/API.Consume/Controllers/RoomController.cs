@@ -1,9 +1,7 @@
-﻿using API.BusinessLayer.Service;
-using API.DtoLayer;
+using API.BusinessLayer.Service;
 using API.EntityLayer.Concrete;
-using Microsoft.AspNetCore.Http;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace API.Consume.Controllers
 {
@@ -12,46 +10,60 @@ namespace API.Consume.Controllers
     public class RoomController : ControllerBase
     {
         private readonly IRoomService _room;
+        private readonly IValidator<Room> _roomValidator;
 
-        public RoomController(IRoomService room)
+        public RoomController(IRoomService room, IValidator<Room> roomValidator)
         {
             _room = room;
+            _roomValidator = roomValidator;
         }
 
         [HttpGet]
-        public IActionResult RoomList() 
+        public IActionResult RoomList()
         {
             var value = _room.GetAllS();
             return Ok(value);
         }
 
         [HttpPost]
-        public IActionResult AddRoom(Room r) 
+        public IActionResult AddRoom(Room room)
         {
-            _room.SInsert(r);
+            var validationResult = _roomValidator.Validate(room);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
+            }
+
+            _room.SInsert(room);
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteRoom(int id)
         {
-            var v = _room.Getbyid(id);
-            _room.SDelete(v);
+            var value = _room.Getbyid(id);
+            _room.SDelete(value);
             return Ok();
         }
 
         [HttpPut]
-        public IActionResult EditRoom(Room r)
+        public IActionResult EditRoom(Room room)
         {
-            _room.SUpdate(r);
+            var validationResult = _roomValidator.Validate(room);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(x => x.ErrorMessage).ToList());
+            }
+
+            _room.SUpdate(room);
             return Ok();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetRoom(int id)
         {
-            var v = _room.Getbyid(id);
-            return Ok(v);
+            var value = _room.Getbyid(id);
+            return Ok(value);
         }
     }
 }

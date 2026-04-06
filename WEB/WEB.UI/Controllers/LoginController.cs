@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
 using WEB_UI.UI_DTO.LoginDTOs;
 
 namespace WEB_UI.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
