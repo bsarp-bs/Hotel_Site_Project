@@ -32,6 +32,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
+                            @if (TempData["ContactSuccess"] is string contactSuccess)
+                            {
+                                <div class="alert alert-success">@contactSuccess</div>
+                            }
+
+                            @if (TempData["ContactError"] is string contactError)
+                            {
+                                <div class="alert alert-danger">@contactError</div>
+                            }
+
                             <form method="post" asp-action="AddContact" asp-controller="CustomerScreen">
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -46,10 +56,18 @@
                                             <label asp-for="Mail">Mail</label>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" asp-for="Subject" placeholder="Konu">
                                             <label asp-for="Subject">Konu</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                          <select asp-for="ContactCategoryID" asp-items="ViewBag.categorylist" class="form-select">
+                                            <option value="">Kategori Seçiniz</option>
+                                          </select>
+                                          <label asp-for="ContactCategoryID">Kategori</label>
                                         </div>
                                     </div>
                                     <div class="col-12">

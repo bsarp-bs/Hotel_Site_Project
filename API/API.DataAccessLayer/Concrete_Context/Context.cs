@@ -21,7 +21,7 @@ namespace API.DataAccessLayer.Concrete_Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("server=.\\SQLEXPRESS;database=HotelsProject;integrated security=true;" +
+                optionsBuilder.UseSqlServer("server=YOUR ADDRESS;database=HotelsProject;integrated security=true;" +
                     "TrustServerCertificate=True;");
             }
         }
@@ -35,5 +35,6 @@ namespace API.DataAccessLayer.Concrete_Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Guest> Guests { get; set; }
         public DbSet<SendedMessages> SendedMessagesdb { get; set; }
+        public DbSet<ContactCategory> ContactCategories { get; set; }
     }
 }

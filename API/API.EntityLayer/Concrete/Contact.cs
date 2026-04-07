@@ -12,5 +12,7 @@ namespace API.EntityLayer.Concrete
         public string Mail { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
+        public int ContactCategoryID { get; set; }
+        public ContactCategory? ContactCategory { get; set; }
     }
 }

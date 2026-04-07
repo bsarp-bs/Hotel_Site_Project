@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using WEB_UI.Models;
 using WEB_UI.UI_DTO.BookingDTOs;
+using WEB_UI.UI_DTO.ContactDTOs;
 using WEB_UI.UI_DTO.DutyDTOs;
 using WEB_UI.UI_DTO.SubscribeDTOs;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using WEB_UI.Models;
-using WEB_UI.UI_DTO.ContactDTOs;
-using Microsoft.AspNetCore.Authorization;
 
 namespace WEB_UI.Controllers
 {
@@ -20,8 +21,19 @@ namespace WEB_UI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public IActionResult CustomerScreenIndex()
+        public async Task<IActionResult> CustomerScreenIndex()
         {
+            var client = _httpClientFactory.CreateClient();
+
+            var values = await client.GetFromJsonAsync<List<ContactCategoryViewModel>>("https://localhost:7227/api/ContactCategory")
+                         ?? new List<ContactCategoryViewModel>();
+
+            ViewBag.categorylist = values.Select(x => new SelectListItem
+            {
+                Text = x.CategoryName,
+                Value = x.ContactCategoryID.ToString()
+            }).ToList();
+
             return View();
         }
 
@@ -85,8 +97,19 @@ namespace WEB_UI.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult AddContact() 
+        public async Task<PartialViewResult> AddContact()
         {
+            var client = _httpClientFactory.CreateClient();
+
+            var values = await client.GetFromJsonAsync<List<ContactCategoryViewModel>>("https://localhost:7227/api/ContactCategory")
+                         ?? new List<ContactCategoryViewModel>();
+
+            ViewBag.categorylist = values.Select(x => new SelectListItem
+            {
+                Text = x.CategoryName,
+                Value = x.ContactCategoryID.ToString()
+            }).ToList();
+
             return PartialView();
         }
 
@@ -95,20 +118,33 @@ namespace WEB_UI.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData["ContactError"] = "Lutfen iletisim formundaki alanlari kontrol edin.";
                 return RedirectToAction("CustomerScreenIndex");
             }
 
             var client = _httpClientFactory.CreateClient();
 
+            var values = await client.GetFromJsonAsync<List<ContactCategoryViewModel>>("https://localhost:7227/api/ContactCategory")
+                ?? new List<ContactCategoryViewModel>();
+
+            ViewBag.categorylist = values.Select(x => new SelectListItem
+            {
+                Text = x.CategoryName,
+                Value = x.ContactCategoryID.ToString()
+            }).ToList();
+
+
             var response = await client.PostAsJsonAsync("https://localhost:7227/api/Contact", _contact);
 
             if (response.IsSuccessStatusCode)
             {
+                TempData["ContactSuccess"] = "Mesajiniz gonderildi.";
                 return RedirectToAction("CustomerScreenIndex");
             }
 
-            ModelState.AddModelError(string.Empty, "Mail yollarken hata oluştu.");
-            return View(_contact);
+            var responseText = await response.Content.ReadAsStringAsync();
+            TempData["ContactError"] = $"Mesaj gonderilemedi. Kod: {(int)response.StatusCode}. Detay: {responseText}";
+            return RedirectToAction("CustomerScreenIndex");
         }
     }
 }

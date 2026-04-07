@@ -48,6 +48,9 @@ builder.Services.AddScoped<IContactDAL, EFContactDAL>();
 builder.Services.AddScoped<ISendedMessagesService, SendedMessagesBL>();
 builder.Services.AddScoped<ISendedMessagesDAL, EFSendedMessagesDAL>();
 
+builder.Services.AddScoped<IContactCategoryService, ContactCategoryManagerBL>();
+builder.Services.AddScoped<IContactCategoryDAL, EFContactCategoryDAL>();
+
 // CORS
 builder.Services.AddCors(opt =>
 {
