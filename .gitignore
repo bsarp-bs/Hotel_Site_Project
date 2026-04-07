@@ -1,23 +1,70 @@
+# Visual Studio
 .vs/
-.dotnet/
-
-# Build outputs
-bin/
-obj/
-
-# User-specific files
-*.user
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
 
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Core
+appsettings.Development.json
+appsettings.Local.json
+
 # Logs
 *.log
+logs/
 
-# ASP.NET / local settings
-appsettings.Development.json
+# Rider
+.idea/
 
-# Node/web dependencies and build artifacts
+# VS Code
+.vscode/
+
+# Node
 node_modules/
 dist/
 build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results
+TestResults/
+
+# Coverage
+coverage/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Dotnet tools
+.dotnet/
+
+# Environment variables
+.env
+
+# SQL Server LocalDB
+*.mdf
+*.ldf
+
+# IIS Express
+iisexpress/
+
+# Backup & temp files
+*.bak
+*.tmp
+*.temp
