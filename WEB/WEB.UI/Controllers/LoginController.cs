@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
+using System.Security.Claims;
 using WEB_UI.UI_DTO.LoginDTOs;
 
 namespace WEB_UI.Controllers
@@ -34,7 +37,24 @@ namespace WEB_UI.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("TeamIndex", "Team");
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, loginDto.Username)
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    claimsPrincipal,
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
+                    });
+
+                return RedirectToAction("AdminIndex", "Admin");
             }
 
             var errors = await response.Content.ReadFromJsonAsync<List<string>>();

@@ -13,18 +13,18 @@ builder.Configuration.GetSection("RapidApi");
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddAutoMapper(typeof(UI_MapperConfig));
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opt =>
+    {
+        opt.Cookie.HttpOnly = true;
+        opt.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+        opt.LoginPath = "/Login/LoginIndex";
+    });
 
 builder.Services.AddMvc(config =>
 {
     var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
-});
-
-builder.Services.ConfigureApplicationCookie(opt =>
-{
-    opt.Cookie.HttpOnly = true;
-    opt.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-    opt.LoginPath = "/CustomerScreen/CustomerScreenIndex";
 });
 
 
@@ -42,8 +42,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseAuthentication();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -21,7 +21,7 @@ namespace API.DataAccessLayer.Concrete_Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("server=YOUR ADDRESS;database=HotelsProject;integrated security=true;" +
+                optionsBuilder.UseSqlServer("server=YOUR ADRESS;database=HotelsProject;integrated security=true;" +
                     "TrustServerCertificate=True;");
             }
         }

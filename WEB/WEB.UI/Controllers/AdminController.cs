@@ -6,7 +6,7 @@ namespace WEB_UI.Controllers
     {
         public IActionResult AdminIndex()
         {
-            return View();
+            return View("AdminHome");
         }
 
         public PartialViewResult HeadPartial() 
